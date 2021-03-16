@@ -79,9 +79,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   const handleClick = () =>  {
- 
+    if(input){
     setTasks([...tasks, {done: false, task: `${input}`, time: "2:00pm"}]);
     setInput("")
+    }
   }
   const handleChange = (e) => {
     setInput(e.target.value)
