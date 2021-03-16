@@ -21,17 +21,17 @@ const StyledTask = styled.div`
 }
 `
 
-const Task = () => {
+const Task = ({ task }) => {
 return(
     <StyledTask>
             <div className="check">
                 <input type="radio"></input>
             </div>
             <div className="task">
-                <p>Shopping and cooking and cleaning and more and more</p>
+                <p>{task.task}</p>
             </div>
             <div className="time">
-                <p>2:00PM</p>
+                <p>{task.time}</p>
             </div>
     </StyledTask>
 )

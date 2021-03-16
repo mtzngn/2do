@@ -109,9 +109,8 @@ function App() {
           </div>
         </div>
         <hr/>
-        <Task/>
-        <Task/>
-        <Task/>
+        {tasks ? tasks.map((task)=>{return(<Task task={task}/>)}) : <></>}
+        
 
       </div>
       <div className="enter-task">
