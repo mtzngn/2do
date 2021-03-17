@@ -77,7 +77,7 @@ function App() {
 
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
-
+  const [id, setId] = useState(1);
 
   const formatAMPM = (date) => {
     var hours = date.getHours();
@@ -93,7 +93,8 @@ function App() {
   const handleClick = () =>  {
     if(input){
       let now = formatAMPM(new Date);
-    setTasks([...tasks, {done: false, task: `${input}`, time: `${now}`}]);
+    setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
+    setId(id + 1);
     setInput("")
     }
   }
@@ -104,7 +105,8 @@ function App() {
     e.preventDefault();
     if(input){
       let now = formatAMPM(new Date);
-      setTasks([...tasks, {done: false, task: `${input}`, time: `${now}`}]);
+      setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
+      setId(id + 1);
       setInput("")
       }
   }
@@ -129,7 +131,7 @@ function App() {
   return (
     <StyledApp>
       <div className="title">
-        <h1>to do app</h1>
+        <h1>2do app</h1>
       </div>
 
       <div className="container">
@@ -148,11 +150,8 @@ function App() {
           </div>
         </div>
         <hr/>
-        {tasks ? tasks.map((task)=>{
-          return(
-          <Task task={task}/>)}
-          ) : <></>
-          }
+        <Task tasks={tasks} setTasks={setTasks}/>
+
         
 
       </div>
