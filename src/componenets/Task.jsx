@@ -3,24 +3,38 @@ import styled from"styled-components";
 
 const StyledTask = styled.div`
     width: 100%;
+    min-height: 12vh;
+    height:auto;
+
     display: flex;
     justify-content: space-between;
     align-items:center;
-    height: 12vh;
     border-bottom: 1px solid rgba(0,0,0, 0.3);
+    background-color: ${({ done }) => done ? '#CAC9B0' : '' };
     :hover{
-        box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.3);
-        transform: translateY(-2px);
+        box-shadow: 1px 1px 8px 2px rgba(0,0,0, 0.3);
         transition: all 0.3s ease-in;
     }
     
 
+input, button {
+    cursor: pointer;
 
+}
 .check{
     margin-left: 5px;
     width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
 }
 .task{
+    height: 80%;
+    width:65%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+
     font-size: 0.8rem;
     p{
         text-decoration: ${ ({ done }) => done ? 'line-through' : 'none'};
@@ -28,6 +42,28 @@ const StyledTask = styled.div`
 }
 .time{
     width: 20%;
+    font-size: 0.8rem;
+    .btn{
+        height: 2rem;
+        width: 3rem;
+        border-radius: 5px;
+        border:none;
+        background-color: #F07167;
+        box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
+      }
+      .btn:hover{
+        background-color: #0081A7;
+        color: #FDFCDC;
+        box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
+        transition: all 0.3s ease-in;
+        cursor: pointer;
+      }
+      .btn:active{
+        background-color: #005A74;
+        box-shadow:2px 2px 3px 1px rgba(0,0,0, 0.3), inset 4px 5px 5px 1px rgba(0,0,0, 0.3);
+      }
+      .btn:focus {outline:0;}
+    
 }
 `
 
@@ -60,7 +96,7 @@ const Task = ({ tasks, setTasks }) => {
                 </div>
                 <div className="time" key={i+200}>
                     <p key={i+250}>{task.time}</p>
-                    <button id={task.id} onClick={handleClick}>Delete</button>
+                    <button className="btn" id={task.id} onClick={handleClick}>Delete</button>
                 </div>
             </StyledTask>
         )
