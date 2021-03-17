@@ -18,6 +18,11 @@ align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
+  h1{
+    font-size: 3em;
+    font-family: 'Rancho', cursive;
+  }
 }
 .container{
   min-height:fit-content;
@@ -48,6 +53,12 @@ align-items: center;
   }
 }
 .enter-task{
+  display:flex;
+  form{
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+  }
   input{
     height: 2rem;
     width:70%;
@@ -83,6 +94,31 @@ align-items: center;
       }
       .btn:focus {outline:0;}
 }
+@media(min-width: 768px){
+  .title{
+  h1{
+    font-size: 4.5em;
+  }
+}
+h3{
+  font-size: 2em;
+}
+h4{
+  font-size: 1.5em;
+}
+.enter-task{
+  input{
+    height: 3rem;
+    font-size: 1.3em;
+
+  }
+  .btn{
+    height: 3.5rem;
+    width: 3.5rem;
+
+  }
+}
+}
 ` 
 
 function App() {
@@ -104,7 +140,7 @@ function App() {
 
   const handleClick = () =>  {
     if(input){
-      let now = formatAMPM(new Date);
+      let now = formatAMPM(new Date());
     setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
     setId(id + 1);
     setInput("")
@@ -116,7 +152,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(input){
-      let now = formatAMPM(new Date);
+      let now = formatAMPM(new Date());
       setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
       setId(id + 1);
       setInput("")

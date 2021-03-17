@@ -29,11 +29,13 @@ input, button {
     align-items:center;
 }
 .task{
-    height: 80%;
+    min-height: 12vh;
+    height:auto;
     width:65%;
     display:flex;
     justify-content:flex-start;
     align-items:center;
+    word-break: break-all;
 
     font-size: 0.8rem;
     p{
@@ -43,6 +45,10 @@ input, button {
 .time{
     width: 20%;
     font-size: 0.8rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     .btn{
         height: 2rem;
         width: 3rem;
@@ -65,18 +71,34 @@ input, button {
       .btn:focus {outline:0;}
     
 }
+
+@media(min-width: 768px){
+  .check{
+    font-size: 1.1rem;
+
+  }
+  .task{
+    font-size: 1.1rem;
+
+  }
+  .time{
+    font-size: 1.1rem;
+
+  }
+ 
+}
 `
 
 const Task = ({ tasks, setTasks }) => {
 
     const handleClick = (e) => {
         let tempA = tasks;
-        setTasks(tempA.filter(task => task.id != e.target.id));
+        setTasks(tempA.filter(task => task.id !== e.target.id));
 
     }
     const handleChange = (e) =>{
         let tempA = tasks.map((task)=>{
-            if(task.id == e.target.id){
+            if(task.id === e.target.id){
                 task.done = !task.done;
             }
             return task;
@@ -84,6 +106,7 @@ const Task = ({ tasks, setTasks }) => {
         setTasks(tempA);
 
     }
+    
     return(
         tasks ? tasks.map((task,i)=>{
             return(    
@@ -92,7 +115,7 @@ const Task = ({ tasks, setTasks }) => {
                     <input type="checkbox" key={i+50} id={task.id} onChange={handleChange}></input>
                 </div>
                 <div className="task" key={i+100}>
-                    <p key={i+150}>{task.task}</p>
+                    <p key={i+150} >{task.task}</p>
                 </div>
                 <div className="time" key={i+200}>
                     <p key={i+250}>{task.time}</p>
