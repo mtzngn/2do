@@ -13,7 +13,7 @@ const StyledButton = styled.button`
     color: #FDFCDC;
     box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
     transform: translateY(-1px);
-    transition: all 0.3s ease-in;
+    transition: all 0.1s ease-in;
     cursor: pointer;
     }
     :active{
