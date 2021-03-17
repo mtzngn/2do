@@ -44,10 +44,12 @@ input, button {
 }
 .time{
     width: 20%;
+    min-height: 12vh;
+    height:auto;
     font-size: 0.8rem;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:space-around;
     align-items:center;
     .btn{
         height: 2rem;
@@ -83,7 +85,6 @@ input, button {
   }
   .time{
     font-size: 1.1rem;
-
   }
  
 }
@@ -91,7 +92,7 @@ input, button {
 
 const Task = ({ tasks, setTasks }) => {
 
-    const handleClick = (e) => {
+    const handleDelete = (e) => {
         let tempA = tasks;
         setTasks(tempA.filter(task => task.id !== e.target.id));
 
@@ -119,7 +120,7 @@ const Task = ({ tasks, setTasks }) => {
                 </div>
                 <div className="time" key={i+200}>
                     <p key={i+250}>{task.time}</p>
-                    <button className="btn" id={task.id} onClick={handleClick}>Delete</button>
+                    <button className="btn" id={task.id} onClick={handleDelete}>Delete</button>
                 </div>
             </StyledTask>
         )
