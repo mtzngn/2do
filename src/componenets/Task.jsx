@@ -29,6 +29,8 @@ const StyledTask = styled.div`
 `
 
 const Task = ({ task }) => {
+
+
 return(
     <StyledTask>
             <div className="check">

@@ -78,9 +78,22 @@ function App() {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
 
+
+  const formatAMPM = (date) => {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
   const handleClick = () =>  {
     if(input){
-    setTasks([...tasks, {done: false, task: `${input}`, time: "2:00pm"}]);
+      let now = formatAMPM(new Date);
+    setTasks([...tasks, {done: false, task: `${input}`, time: `${now}`}]);
     setInput("")
     }
   }
@@ -90,10 +103,12 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(input){
-      setTasks([...tasks, {done: false, task: `${input}`, time: "2:00pm"}]);
+      let now = formatAMPM(new Date);
+      setTasks([...tasks, {done: false, task: `${input}`, time: `${now}`}]);
       setInput("")
       }
   }
+
   const nth = (d) => {
     if (d > 3 && d < 21) return 'th';
     switch (d % 10) {
