@@ -5,7 +5,6 @@ const StyledTask = styled.div`
     width: 100%;
     min-height: 12vh;
     height:auto;
-
     display: flex;
     justify-content: space-between;
     align-items:center;
@@ -16,10 +15,8 @@ const StyledTask = styled.div`
         transition: all 0.3s ease-in;
     }
     
-
 input, button {
     cursor: pointer;
-
 }
 .check{
     margin-left: 5px;
@@ -63,7 +60,7 @@ input, button {
         background-color: #0081A7;
         color: #FDFCDC;
         box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
-        transition: all 0.3s ease-in;
+        transition: all 0.1s ease-in;
         cursor: pointer;
       }
       .btn:active{
