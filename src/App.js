@@ -2,6 +2,9 @@ import react, { useState } from "react";
 import './App.css';
 import styled from "styled-components";
 import Task from "./componenets/Task";
+import DateSection from "./componenets/DateSection";
+import Title from "./componenets/Title";
+import Form from "./componenets/Form";
 
 const StyledApp = styled.div`
 width: 100%;
@@ -12,18 +15,7 @@ display: flex;
 flex-direction: column;
 justify-content:flex-start;
 align-items: center;
-.title{
-  margin: 5%;
-  width:100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  h1{
-    font-size: 3em;
-    font-family: 'Rancho', cursive;
-  }
-}
+
 .container{
   min-height:fit-content;
   width: 80%;
@@ -33,7 +25,7 @@ align-items: center;
   justify-content: center;
   align-items:center;
   border-radius: 25px 25px 0 0;
-
+  box-shadow: 10px 10px 50px 5px rgba(0,0,0, 0.4);
 
   .head{
     width: 95%;
@@ -41,84 +33,19 @@ align-items: center;
     display: flex;
     align-items:center;
     justify-content: space-between;
-
-    .head-right{
-     
-    }
   }
   hr{
     width: 99%;
     height: 0.2px;
-    color: red;
   }
-}
-.enter-task{
-  display:flex;
-  form{
-    display: flex;
-    justify-content:space-around;
-    align-items:center;
-  }
-  input{
-    height: 2rem;
-    width:70%;
-  
-    right: 30vw;
-    border:none;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 1px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
-  }
-  .btn{
-        height: 3rem;
-        width: 3rem;
-        
-        border-radius: 50%;
-        border:none;
-        background-color: #F07167;
-        box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
-      }
-      .btn:hover{
-        background-color: #0081A7;
-        color: #FDFCDC;
-        box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
-        transform: translateY(-1px);
-        transition: all 0.3s ease-in;
-        cursor: pointer;
-      }
-      .btn:active{
-        background-color: #005A74;
-        box-shadow:2px 2px 3px 1px rgba(0,0,0, 0.3), inset 4px 5px 5px 1px rgba(0,0,0, 0.3);
-      }
-      .btn:focus {outline:0;}
 }
 @media(min-width: 768px){
-  .title{
-  h1{
-    font-size: 4.5em;
-  }
-}
 h3{
   font-size: 2em;
 }
 h4{
   font-size: 1.5em;
-}
-.enter-task{
-  input{
-    height: 3rem;
-    font-size: 1.3em;
-
-  }
-  .btn{
-    height: 3.5rem;
-    width: 3.5rem;
-
-  }
-}
-}
+}}
 ` 
 
 function App() {
@@ -127,86 +54,24 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [id, setId] = useState(1);
 
-  const formatAMPM = (date) => {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-  }
-
-  const handleClick = () =>  {
-    if(input){
-      let now = formatAMPM(new Date());
-    setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
-    setId(id + 1);
-    setInput("")
-    }
-  }
-  const handleChange = (e) => {
-    setInput(e.target.value)
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if(input){
-      let now = formatAMPM(new Date());
-      setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
-      setId(id + 1);
-      setInput("")
-      }
-  }
-
-  const nth = (d) => {
-    if (d > 3 && d < 21) return 'th';
-    switch (d % 10) {
-      case 1:  return "st";
-      case 2:  return "nd";
-      case 3:  return "rd";
-      default: return "th";
-    }
-  }
-  let today = new Date();
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  let monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
-  let dayname = String(days[today.getDay()]);
-  let dayNum = String(today.getDate()).padStart(2, '0');
-  let monthName = monthNames[today.getMonth()];
-
   return (
     <StyledApp>
-      <div className="title">
-        <h1>2do app</h1>
-      </div>
-
+      <Title/>
       <div className="container">
         <div className="head">
-          <div className="date">
-            <h3>{dayname}, <span id="no-day">{dayNum}{nth(dayNum)}</span></h3>
-            <h4>{monthName}</h4>
-          </div>
+          <DateSection/>
           <div className="head-right">
-            <div>
+            <div className="no-tasks" style={{textAlign: "center"}}>
               <h4>{tasks.length} tasks</h4>
             </div>
-            <div className="enter-task">
-              <form onSubmit={handleSubmit}>
-                  <input value={input} type="text" onChange={handleChange}></input>
-                  <button className="btn" onClick={handleClick}>Add</button>
-              </form>
+            <div className="enter-task" style={{display: "flex"}}>
+              <Form input={input} setInput={setInput} tasks = {tasks} setTasks={setTasks} id={id} setId={setId}></Form>
             </div>
           </div>
         </div>
         <hr/>
         <Task tasks={tasks} setTasks={setTasks}/>
-
-        
-
       </div>
-
     </StyledApp>
   );
 }
