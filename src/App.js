@@ -5,21 +5,27 @@ import Task from "./componenets/Task";
 
 const StyledApp = styled.div`
 width: 100%;
-height: 100vh;
+min-height: 100vh;
+height:auto;
 background: linear-gradient(135deg, #F07167 50%, #0081A7 50% );
 display: flex;
 flex-direction: column;
 justify-content:flex-start;
 align-items: center;
 .title{
-  height: 10%;
+  margin: 5%;
   width:100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
+  h1{
+    font-size: 3em;
+    font-family: 'Rancho', cursive;
+  }
 }
 .container{
-  height:fit-content;
+  min-height:fit-content;
   width: 80%;
   background-color: #FDFCDC;
   display: flex;
@@ -37,17 +43,7 @@ align-items: center;
     justify-content: space-between;
 
     .head-right{
-      button{
-        height: 3rem;
-        width: 3rem;
-        position:relative;
-        top: 5vh;
-        border-radius: 50%50%;
-        border:none;
-        background-color: #F07167;
-        box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
-
-      }
+     
     }
   }
   hr{
@@ -57,11 +53,16 @@ align-items: center;
   }
 }
 .enter-task{
+  display:flex;
+  form{
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+  }
   input{
     height: 2rem;
-    width:50%;
-    position:absolute;
-    top:21vh;
+    width:70%;
+  
     right: 30vw;
     border:none;
     border-radius: 10px;
@@ -70,6 +71,53 @@ align-items: center;
     transition: all 0.3s ease-in-out;
     box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
   }
+  .btn{
+        height: 3rem;
+        width: 3rem;
+        
+        border-radius: 50%;
+        border:none;
+        background-color: #F07167;
+        box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
+      }
+      .btn:hover{
+        background-color: #0081A7;
+        color: #FDFCDC;
+        box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
+        transform: translateY(-1px);
+        transition: all 0.3s ease-in;
+        cursor: pointer;
+      }
+      .btn:active{
+        background-color: #005A74;
+        box-shadow:2px 2px 3px 1px rgba(0,0,0, 0.3), inset 4px 5px 5px 1px rgba(0,0,0, 0.3);
+      }
+      .btn:focus {outline:0;}
+}
+@media(min-width: 768px){
+  .title{
+  h1{
+    font-size: 4.5em;
+  }
+}
+h3{
+  font-size: 2em;
+}
+h4{
+  font-size: 1.5em;
+}
+.enter-task{
+  input{
+    height: 3rem;
+    font-size: 1.3em;
+
+  }
+  .btn{
+    height: 3.5rem;
+    width: 3.5rem;
+
+  }
+}
 }
 ` 
 
@@ -92,7 +140,7 @@ function App() {
 
   const handleClick = () =>  {
     if(input){
-      let now = formatAMPM(new Date);
+      let now = formatAMPM(new Date());
     setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
     setId(id + 1);
     setInput("")
@@ -104,7 +152,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(input){
-      let now = formatAMPM(new Date);
+      let now = formatAMPM(new Date());
       setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
       setId(id + 1);
       setInput("")
@@ -144,8 +192,11 @@ function App() {
             <div>
               <h4>{tasks.length} tasks</h4>
             </div>
-            <div>
-              <button onClick={handleClick}>Add</button>
+            <div className="enter-task">
+              <form onSubmit={handleSubmit}>
+                  <input value={input} type="text" onChange={handleChange}></input>
+                  <button className="btn" onClick={handleClick}>Add</button>
+              </form>
             </div>
           </div>
         </div>
@@ -155,11 +206,7 @@ function App() {
         
 
       </div>
-      <div className="enter-task">
-        <form onSubmit={handleSubmit}>
-          <input value={input} type="text" onChange={handleChange}></input>
-        </form>
-      </div>
+
     </StyledApp>
   );
 }
