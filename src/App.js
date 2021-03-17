@@ -77,32 +77,72 @@ function App() {
 
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [id, setId] = useState(1);
+
+  const formatAMPM = (date) => {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
   const handleClick = () =>  {
     if(input){
-    setTasks([...tasks, {done: false, task: `${input}`, time: "2:00pm"}]);
+      let now = formatAMPM(new Date);
+    setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
+    setId(id + 1);
     setInput("")
     }
   }
   const handleChange = (e) => {
     setInput(e.target.value)
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(input){
+      let now = formatAMPM(new Date);
+      setTasks([{id: `${id}`, done: false, task: `${input}`, time: `${now}`}, ...tasks]);
+      setId(id + 1);
+      setInput("")
+      }
+  }
+
+  const nth = (d) => {
+    if (d > 3 && d < 21) return 'th';
+    switch (d % 10) {
+      case 1:  return "st";
+      case 2:  return "nd";
+      case 3:  return "rd";
+      default: return "th";
+    }
+  }
+  let today = new Date();
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+  let dayname = String(days[today.getDay()]);
+  let dayNum = String(today.getDate()).padStart(2, '0');
+  let monthName = monthNames[today.getMonth()];
 
   return (
     <StyledApp>
       <div className="title">
-        <h1>to do app</h1>
+        <h1>2do app</h1>
       </div>
 
       <div className="container">
         <div className="head">
           <div className="date">
-            <h3>Monday, <span id="no-day">12th</span></h3>
-            <h4>March</h4>
+            <h3>{dayname}, <span id="no-day">{dayNum}{nth(dayNum)}</span></h3>
+            <h4>{monthName}</h4>
           </div>
           <div className="head-right">
             <div>
-              <h4>No tasks</h4>
+              <h4>{tasks.length} tasks</h4>
             </div>
             <div>
               <button onClick={handleClick}>Add</button>
@@ -110,12 +150,15 @@ function App() {
           </div>
         </div>
         <hr/>
-        {tasks ? tasks.map((task)=>{return(<Task task={task}/>)}) : <></>}
+        <Task tasks={tasks} setTasks={setTasks}/>
+
         
 
       </div>
       <div className="enter-task">
-        <input value={input} type="text" onChange={handleChange}></input>
+        <form onSubmit={handleSubmit}>
+          <input value={input} type="text" onChange={handleChange}></input>
+        </form>
       </div>
     </StyledApp>
   );

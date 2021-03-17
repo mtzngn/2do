@@ -28,20 +28,29 @@ const StyledTask = styled.div`
 }
 `
 
-const Task = ({ task }) => {
-return(
-    <StyledTask>
-            <div className="check">
-                <input type="radio"></input>
-            </div>
-            <div className="task">
-                <p>{task.task}</p>
-            </div>
-            <div className="time">
-                <p>{task.time}</p>
-            </div>
-    </StyledTask>
-)
+const Task = ({ tasks, setTasks }) => {
+
+    return(
+        tasks ? tasks.map((task,i)=>{
+            return(    
+            <StyledTask key={i+300}>
+                <div className="check" key={i}>
+                    <input type="checkbox" key={i+50}></input>
+                </div>
+                <div className="task" key={i+100}>
+                    <p key={i+150}>{task.task}</p>
+                </div>
+                <div className="time" key={i+200}>
+                    <p key={i+250}>{task.time}</p>
+                </div>
+            </StyledTask>
+        )
+    }) :  (<></>)
+    
+    )
+
+
+
 }
 
 export default Task;
