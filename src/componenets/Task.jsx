@@ -22,6 +22,9 @@ const StyledTask = styled.div`
 }
 .task{
     font-size: 0.8rem;
+    p{
+        text-decoration: ${ ({ done }) => done ? 'line-through' : 'none'};
+    }
 }
 .time{
     width: 20%;
@@ -35,12 +38,22 @@ const Task = ({ tasks, setTasks }) => {
         setTasks(tempA.filter(task => task.id != e.target.id));
 
     }
+    const handleChange = (e) =>{
+        let tempA = tasks.map((task)=>{
+            if(task.id == e.target.id){
+                task.done = !task.done;
+            }
+            return task;
+        });
+        setTasks(tempA);
+
+    }
     return(
         tasks ? tasks.map((task,i)=>{
             return(    
-            <StyledTask key={i+300}>
+            <StyledTask key={i+300} done={task.done}>
                 <div className="check" key={i}>
-                    <input type="checkbox" key={i+50}></input>
+                    <input type="checkbox" key={i+50} id={task.id} onChange={handleChange}></input>
                 </div>
                 <div className="task" key={i+100}>
                     <p key={i+150}>{task.task}</p>
