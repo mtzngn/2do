@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,OACE,QAAS,CACT,SAAU,CACV,kCACF","file":"main.b162fcad.chunk.css","sourcesContent":["* {\n  margin: 0;\n  padding: 0;\n  font-family: 'Open Sans', sans-serif;\n}\n"]}
