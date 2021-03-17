@@ -30,6 +30,11 @@ const StyledTask = styled.div`
 
 const Task = ({ tasks, setTasks }) => {
 
+    const handleClick = (e) => {
+        let tempA = tasks;
+        setTasks(tempA.filter(task => task.id != e.target.id));
+
+    }
     return(
         tasks ? tasks.map((task,i)=>{
             return(    
@@ -42,6 +47,7 @@ const Task = ({ tasks, setTasks }) => {
                 </div>
                 <div className="time" key={i+200}>
                     <p key={i+250}>{task.time}</p>
+                    <button id={task.id} onClick={handleClick}>Delete</button>
                 </div>
             </StyledTask>
         )
