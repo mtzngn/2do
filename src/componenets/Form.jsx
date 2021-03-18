@@ -13,9 +13,10 @@ const StyledForm = styled.form`
     width:70%;
     right: 30vw;
     border:none;
-    border-radius: 10px;
-    background-color: #fff;
+    border-radius: 30px;
+    background-color: #0081A7;
     padding: 1px;
+    padding-left: 0.5em;
     transition: all 0.3s ease-in-out;
     box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
     }

@@ -12,7 +12,7 @@ const StyledTitle = styled.div`
   h1{
     font-size: 3em;
     font-family: 'Rancho', cursive;
-    color: #0081A7;
+    color: ${({ checked }) => checked ? '#F07167' : '#0081A7'}  ;
     text-shadow: 2px 2px 3px rgba(0,0,0, 0.7);
   }
 
@@ -30,9 +30,9 @@ const StyledTitle = styled.div`
   }}
 `
 
-const Title = ()=>{
+const Title = ({ checked })=>{
     return(
-    <StyledTitle>
+    <StyledTitle checked={checked}>
         
             <h1>2do app</h1>
         

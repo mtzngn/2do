@@ -9,7 +9,9 @@ const StyledTask = styled.div`
     justify-content: space-between;
     align-items:center;
     border-bottom: 1px solid rgba(0,0,0, 0.3);
-    background-color: ${({ done }) => done ? '#CAC9B0' : '' };
+    p{
+        color: ${({ checked }) => checked ? '#fff' : '#000'};
+    }
     :hover{
         box-shadow: 1px 1px 8px 2px rgba(0,0,0, 0.3);
         transition: all 0.3s ease-in;
@@ -87,7 +89,7 @@ input, button {
 }
 `
 
-const Task = ({ tasks, setTasks }) => {
+const Task = ({ tasks, setTasks, checked }) => {
 
     const handleDelete = (e) => {
         let tempA = tasks;
@@ -108,7 +110,7 @@ const Task = ({ tasks, setTasks }) => {
     return(
         tasks ? tasks.map((task,i)=>{
             return(    
-            <StyledTask key={i+300} done={task.done}>
+            <StyledTask key={i+300} done={task.done} checked={checked}>
                 <div className="check" key={i}>
                     <input type="checkbox" key={i+50} id={task.id} onChange={handleChange}></input>
                 </div>

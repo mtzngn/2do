@@ -13,12 +13,14 @@ const StyledDateSection = styled.div`
       }
       #month-name{
         font-weight: 300;
+        color: ${({ checked }) => checked ? '#fff' : '#000'};
+
 
       }
     }
 `
 
-const DateSection = () =>{
+const DateSection = ({ checked }) =>{
 
     const nth = (d) => {
         if (d > 3 && d < 21) return 'th';
@@ -38,7 +40,7 @@ const DateSection = () =>{
       let monthName = monthNames[today.getMonth()];
     
 return(
-    <StyledDateSection>
+    <StyledDateSection checked={checked}>
         <div className="date">
             <h3 id="name-day">{dayname}, <span id="no-day">{dayNum}{nth(dayNum)}</span></h3>
             <h4 id="month-name">{monthName}</h4>
