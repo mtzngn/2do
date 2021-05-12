@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { setState } from "react";
 import './App.css';
 import styled from "styled-components";
 import Task from "./componenets/Task";
