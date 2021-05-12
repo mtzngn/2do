@@ -20,6 +20,9 @@ const StyledForm = styled.form`
     transition: all 0.3s ease-in-out;
     box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
     }
+    input:focus {
+        box-shadow: 0 0 16px 2px #0081A7;
+    }
 
     @media(min-width: 768px){
     input{

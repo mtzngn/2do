@@ -9,9 +9,8 @@ const StyledButton = styled.button`
     background-color: #F07167;
     box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
     :hover{
-    background-color: #0081A7;
     color: #FDFCDC;
-    box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
+    box-shadow: 0 0  16px 2px #F07167;
     transform: translateY(-1px);
     transition: all 0.1s ease-in;
     cursor: pointer;

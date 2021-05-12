@@ -1,4 +1,4 @@
-import react from"react";
+import React from"react";
 import styled from"styled-components";
 
 const StyledTask = styled.div`
@@ -8,13 +8,14 @@ const StyledTask = styled.div`
     display: flex;
     justify-content: space-between;
     align-items:center;
-    border-bottom: 1px solid rgba(0,0,0, 0.3);
     p{
         color: ${({ checked }) => checked ? '#fff' : '#000'};
     }
     :hover{
         box-shadow: 1px 1px 8px 2px rgba(0,0,0, 0.3);
         transition: all 0.3s ease-in;
+        transform: scale(1.02);
+        background-color: ${({ checked }) => checked ? '#0483a7' : '#e0dfc3'};
     }
     
 input, button {
@@ -59,9 +60,8 @@ input, button {
         box-shadow: 2px 3px 5px 1px rgba(0,0,0, 0.2);
       }
       .btn:hover{
-        background-color: #0081A7;
         color: #FDFCDC;
-        box-shadow: 4px 5px 5px 1px rgba(0,0,0, 0.3);
+        box-shadow: 0 0  16px 2px #F07167;
         transition: all 0.1s ease-in;
         cursor: pointer;
       }
@@ -79,11 +79,11 @@ input, button {
 
   }
   .task{
-    font-size: 1.1rem;
+    font-size: 1.5rem;
 
   }
   .time{
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
  
 }
