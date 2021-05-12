@@ -8,12 +8,13 @@ const StyledTask = styled.div`
     display: flex;
     justify-content: space-between;
     align-items:center;
+    transition: transform 200ms ease-in-out, background-color 200ms ease-in-out;
+
     p{
         color: ${({ checked }) => checked ? '#fff' : '#000'};
     }
     :hover{
         box-shadow: 1px 1px 8px 2px rgba(0,0,0, 0.3);
-        transition: all 0.3s ease-in;
         transform: scale(1.02);
         background-color: ${({ checked }) => checked ? '#0483a7' : '#e0dfc3'};
     }
